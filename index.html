@@ -3,218 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Streamline SAS</title>
-<meta name="description" content="Streamline SAS – [Description courte de l'activité]">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231f4fd8'/><path d='M8 20c4-8 12-8 16-8M8 14c4 0 8 6 16 6' stroke='white' stroke-width='3' fill='none' stroke-linecap='round'/></svg>">
+<title>Streamline</title>
+<link rel="icon" href="logo.png">
 <style>
-  :root {
-    --bg: #ffffff; --bg-alt: #f5f7fb; --text: #14171f; --muted: #5b6475;
-    --accent: #1f4fd8; --accent-soft: #e8eefc; --border: #e3e7ef;
+  html, body { margin: 0; height: 100%; background: #fff; }
+  img {
+    position: absolute;
+    top: 5vh;
+    left: 5vw;
+    width: min(300px, 50vw);
+    height: auto;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #0f1218; --bg-alt: #161a22; --text: #eef1f6; --muted: #9aa3b5;
-      --accent: #6d93ff; --accent-soft: #1b2440; --border: #252b37;
-    }
+  footer {
+    position: fixed;
+    bottom: 12px;
+    width: 100%;
+    text-align: center;
+    font: 12px system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: #888;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-    background: var(--bg); color: var(--text); line-height: 1.6; font-size: 17px;
-  }
-  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
-  a { color: var(--accent); }
-
-  /* Header */
-  header { position: sticky; top: 0; background: var(--bg); border-bottom: 1px solid var(--border); z-index: 10; }
-  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
-  .logo { font-weight: 700; font-size: 1.15rem; text-decoration: none; color: var(--text); display: flex; align-items: center; gap: 10px; }
-  .logo span.mark { width: 28px; height: 28px; border-radius: 7px; background: var(--accent); display: inline-block; }
-  nav { display: flex; align-items: center; gap: 22px; }
-  nav a.link { color: var(--muted); text-decoration: none; font-size: .95rem; }
-  nav a.link:hover { color: var(--text); }
-  .lang { border: 1px solid var(--border); background: none; color: var(--text); border-radius: 6px; padding: 4px 10px; cursor: pointer; font: inherit; font-size: .85rem; }
-  @media (max-width: 640px) { nav a.link { display: none; } }
-
-  /* Hero */
-  .hero { padding: 96px 0 80px; }
-  .hero h1 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.15; max-width: 760px; letter-spacing: -0.02em; }
-  .hero p { color: var(--muted); font-size: 1.15rem; max-width: 620px; margin: 20px 0 32px; }
-  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 12px 22px; border-radius: 8px; font-weight: 600; }
-  .btn:hover { opacity: .9; }
-
-  /* Sections */
-  section { padding: 72px 0; }
-  section.alt { background: var(--bg-alt); }
-  h2 { font-size: 1.8rem; margin-bottom: 12px; letter-spacing: -0.01em; }
-  .lead { color: var(--muted); max-width: 640px; margin-bottom: 40px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-  .card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 26px; }
-  .card .num { display: inline-flex; width: 36px; height: 36px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); align-items: center; justify-content: center; font-weight: 700; margin-bottom: 14px; }
-  .card h3 { font-size: 1.1rem; margin-bottom: 8px; }
-  .card p { color: var(--muted); font-size: .97rem; }
-  .about p { max-width: 720px; margin-bottom: 16px; }
-
-  .contact-box { border: 1px solid var(--border); border-radius: 12px; padding: 32px; background: var(--bg); max-width: 640px; }
-  .contact-box p { margin-bottom: 8px; }
-
-  /* Legal */
-  .legal { font-size: .92rem; color: var(--muted); }
-  .legal h2 { font-size: 1.3rem; color: var(--text); }
-  .legal h3 { font-size: 1rem; color: var(--text); margin: 22px 0 6px; }
-  .legal p { max-width: 760px; }
-
-  footer { border-top: 1px solid var(--border); padding: 28px 0; font-size: .9rem; color: var(--muted); }
-  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-  footer a { color: var(--muted); }
-
-  /* Language switching */
-  [data-lang="en"] .fr, [data-lang="fr"] .en { display: none !important; }
 </style>
 </head>
-<body data-lang="fr">
-
-<header>
-  <div class="wrap">
-    <a class="logo" href="#top"><span class="mark"></span>Streamline</a>
-    <nav>
-      <a class="link" href="#services"><span class="fr">Services</span><span class="en">Services</span></a>
-      <a class="link" href="#about"><span class="fr">À propos</span><span class="en">About</span></a>
-      <a class="link" href="#contact"><span class="fr">Contact</span><span class="en">Contact</span></a>
-      <button class="lang" id="langBtn" aria-label="Change language">EN</button>
-    </nav>
-  </div>
-</header>
-
-<main id="top">
-  <!-- HERO -->
-  <div class="hero">
-    <div class="wrap">
-      <h1>
-        <span class="fr">[Accroche principale : ce que Streamline fait pour ses clients]</span>
-        <span class="en">[Main headline: what Streamline does for its clients]</span>
-      </h1>
-      <p>
-        <span class="fr">[Une ou deux phrases qui décrivent l'activité, pour qui, et le bénéfice principal.]</span>
-        <span class="en">[One or two sentences describing the business, who it's for, and the main benefit.]</span>
-      </p>
-      <a class="btn" href="#contact"><span class="fr">Nous contacter</span><span class="en">Get in touch</span></a>
-    </div>
-  </div>
-
-  <!-- SERVICES -->
-  <section id="services" class="alt">
-    <div class="wrap">
-      <h2><span class="fr">Nos services</span><span class="en">What we do</span></h2>
-      <p class="lead">
-        <span class="fr">[Phrase d'introduction à vos services.]</span>
-        <span class="en">[Short introduction to your services.]</span>
-      </p>
-      <div class="grid">
-        <div class="card">
-          <div class="num">1</div>
-          <h3><span class="fr">[Service 1]</span><span class="en">[Service 1]</span></h3>
-          <p><span class="fr">[Description courte du service 1.]</span><span class="en">[Short description of service 1.]</span></p>
-        </div>
-        <div class="card">
-          <div class="num">2</div>
-          <h3><span class="fr">[Service 2]</span><span class="en">[Service 2]</span></h3>
-          <p><span class="fr">[Description courte du service 2.]</span><span class="en">[Short description of service 2.]</span></p>
-        </div>
-        <div class="card">
-          <div class="num">3</div>
-          <h3><span class="fr">[Service 3]</span><span class="en">[Service 3]</span></h3>
-          <p><span class="fr">[Description courte du service 3.]</span><span class="en">[Short description of service 3.]</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section id="about" class="about">
-    <div class="wrap">
-      <h2><span class="fr">À propos</span><span class="en">About</span></h2>
-      <p>
-        <span class="fr">[Présentation de Streamline SAS : histoire, fondateur(s), approche, valeurs.]</span>
-        <span class="en">[About Streamline SAS: background, founder(s), approach, values.]</span>
-      </p>
-      <p>
-        <span class="fr">[Deuxième paragraphe optionnel : références, secteurs, localisation.]</span>
-        <span class="en">[Optional second paragraph: references, sectors, location.]</span>
-      </p>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact" class="alt">
-    <div class="wrap">
-      <h2><span class="fr">Contact</span><span class="en">Contact</span></h2>
-      <p class="lead">
-        <span class="fr">Une question, un projet ? Écrivez-nous.</span>
-        <span class="en">A question or a project? Drop us a line.</span>
-      </p>
-      <div class="contact-box">
-        <p><strong>Email :</strong> <a href="mailto:contact@streamline-sas.com">contact@streamline-sas.com</a></p>
-        <p><strong><span class="fr">Téléphone</span><span class="en">Phone</span> :</strong> [+33 X XX XX XX XX]</p>
-        <p><strong><span class="fr">Adresse</span><span class="en">Address</span> :</strong> [Adresse, Code postal Ville, France]</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- MENTIONS LÉGALES (required by French law, LCEN art. 6) -->
-  <section id="mentions" class="legal">
-    <div class="wrap">
-      <h2><span class="fr">Mentions légales</span><span class="en">Legal notice</span></h2>
-
-      <h3><span class="fr">Éditeur du site</span><span class="en">Publisher</span></h3>
-      <p>
-        Streamline SAS, <span class="fr">société par actions simplifiée au capital de</span><span class="en">simplified joint-stock company (SAS) with a share capital of</span> [X] €<br>
-        <span class="fr">Siège social</span><span class="en">Registered office</span> : [Adresse complète]<br>
-        RCS [Ville] [numéro SIREN] — SIRET : [numéro SIRET]<br>
-        <span class="fr">N° TVA intracommunautaire</span><span class="en">EU VAT number</span> : [FRXX XXXXXXXXX]<br>
-        Email : <a href="mailto:contact@streamline-sas.com">contact@streamline-sas.com</a> — <span class="fr">Tél.</span><span class="en">Phone</span> : [+33 X XX XX XX XX]
-      </p>
-
-      <h3><span class="fr">Directeur de la publication</span><span class="en">Publication director</span></h3>
-      <p>[Prénom Nom], <span class="fr">Président</span><span class="en">President</span></p>
-
-      <h3><span class="fr">Hébergeur</span><span class="en">Hosting provider</span></h3>
-      <p>GitHub, Inc. — 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA — <a href="https://github.com" rel="noopener">github.com</a></p>
-
-      <h3><span class="fr">Données personnelles et cookies</span><span class="en">Personal data and cookies</span></h3>
-      <p>
-        <span class="fr">Ce site ne dépose aucun cookie et n'utilise aucun outil de mesure d'audience. Les données que vous nous transmettez par email sont utilisées uniquement pour répondre à votre demande. Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données, que vous pouvez exercer en écrivant à contact@streamline-sas.com.</span>
-        <span class="en">This site sets no cookies and uses no analytics. Any data you send us by email is used only to answer your request. Under the GDPR you have the right to access, correct and delete your data by writing to contact@streamline-sas.com.</span>
-      </p>
-
-      <h3><span class="fr">Propriété intellectuelle</span><span class="en">Intellectual property</span></h3>
-      <p>
-        <span class="fr">L'ensemble du contenu de ce site est la propriété de Streamline SAS. Toute reproduction sans autorisation est interdite.</span>
-        <span class="en">All content on this site is the property of Streamline SAS. Reproduction without permission is prohibited.</span>
-      </p>
-    </div>
-  </section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <span>© <span id="year"></span> Streamline SAS</span>
-    <a href="#mentions"><span class="fr">Mentions légales</span><span class="en">Legal notice</span></a>
-  </div>
-</footer>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-  const btn = document.getElementById('langBtn');
-  function setLang(l) {
-    document.body.dataset.lang = l;
-    document.documentElement.lang = l;
-    btn.textContent = l === 'fr' ? 'EN' : 'FR';
-  }
-  btn.addEventListener('click', () => setLang(document.body.dataset.lang === 'fr' ? 'en' : 'fr'));
-  // Open in English if the URL ends with #en or the browser isn't French
-  if (location.hash === '#en' || !(navigator.language || 'fr').toLowerCase().startsWith('fr')) setLang('en');
-</script>
+<body>
+  <img src="logo.png" alt="Streamline">
+  <footer>Sorry no cookies for you</footer>
 </body>
 </html>
